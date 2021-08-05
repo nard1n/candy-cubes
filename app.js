@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             squares.push(square)
         }
     }
-    createBoard()
+    createBoard();
 
     // Drag the candy
     let colorBeingDragged ;
@@ -42,38 +42,31 @@ document.addEventListener('DOMContentLoaded', () =>{
 
     function dragStart() {
         colorBeingDragged = this.style.backgroundColor;
-        squareIdBeingDragged = parseInt(this.id)
-        console.log(colorBeingDragged);
-        console.log(this.id, 'dragStart');
+        squareIdBeingDragged = parseInt(this.id);
     }
 
     function dragOver(e) {
         e.preventDefault();
-        console.log(this.id, 'dragOver');
     }
 
     function dragEnter(e) {
         e.preventDefault();
-        console.log(this.id, 'dragEnter');
     }
 
     function dragLeave() {
-        this.style.backgroundColor = ''
-        console.log(this.id, 'dragLeave');
+        this.style.backgroundColor = '';
     }
 
     function dragDrop() {
         console.log(this.id, 'dragDrop');
-        colorBeingReplaced = this.style.backgroundColor
-        squareIdBeingReplaced = parseInt(this.id)
-        this.style.backgroundColor = colorBeingDragged
-        squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced
+        colorBeingReplaced = this.style.backgroundColor;
+        squareIdBeingReplaced = parseInt(this.id);
+        this.style.backgroundColor = colorBeingDragged;
+        squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced;
     }
 
     function dragEnd() {
-        console.log(this.id, 'dragEnd');
         //valid moves
-
         let validMoves = [
             squareIdBeingDragged -1, 
             squareIdBeingDragged -width,
@@ -91,7 +84,18 @@ document.addEventListener('DOMContentLoaded', () =>{
         } else squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged
     }
 
-    //checking for matches
+/////drop/add candy after some are cleared
+    function moveDown() {
+        for ( i = 0; i < 55; i++) {
+            if (squares[i + width].style.backgroundColor === '') {
+                squares[i + width].style.backgroundColor = squares[i].style.backgroundColor
+                squares[i].style.backgroundColor = ''
+            }
+        }
+    }
+    
+
+/////checking for matches
     //check for row of three
     function checkRowForThree(){
         for (i = 0; i < 61; i++) {
@@ -109,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             }
         }
     }
-    checkRowForThree()
+    checkRowForThree();
 
     //check for column of three
     function checkColumnForThree(){
@@ -126,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             }
         }
     }
-    checkColumnForThree()
+    checkColumnForThree();
 
     //check for row of Four
     function checkRowForFour(){
@@ -145,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             }
         }
     }
-    checkRowForFour()
+    checkRowForFour();
 
     //check for column of Four
     function checkColumnForFour(){
@@ -162,15 +166,14 @@ document.addEventListener('DOMContentLoaded', () =>{
             }
         }
     }
-    checkColumnForFour()
+    checkColumnForFour();
 
     window.setInterval(function(){
+        moveDown()
         checkRowForFour()
         checkColumnForFour()
         checkRowForThree()
         checkColumnForThree()
-    }, 100)
+    }, 100);
 
-
-
-})
+});
