@@ -1,11 +1,26 @@
+body {
+    background-image: url("images/background.jpeg");
+    max-width: 100vh;
+    display: flex;
+  }
+
 .grid {
     height: 560px;
     width: 560px;
     display:flex;
     flex-wrap: wrap;
+    background-color: rgba(109, 127, 151, 0.5);
+    margin-top: 10%;
+    padding:5px;
+    border-radius: 7px;
 }
 
 .grid div {
     height: 70px;
     width: 70px;
+}
+
+.score-board{
+    display: flex;
+    padding-left: 15%;
 }
